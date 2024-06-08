@@ -19,3 +19,8 @@ data class Product(
     @JsonProperty("cost")
     val cost: Number
 )
+
+data class ProductId(
+    @JsonProperty("id")
+    var id: Int,
+)
