@@ -4,7 +4,7 @@ import com.store.objects.Product
 import com.store.objects.ProductType
 
 class ProductRepository {
-    var products: Array<Product>
+    private var products: Array<Product>
 
     init {
         val book = Product(id = 0, name = "Harry Potter", type = ProductType.book, inventory=2, cost = 500)
@@ -14,7 +14,10 @@ class ProductRepository {
         val other2 = Product(id = 4, name = "Pen", type = ProductType.other, inventory=9, cost = 10)
         products = arrayOf(book, gadget, food, other, other2)
     }
-    fun getProducts(type: ProductType) : Array<Product> {
+
+    fun getProducts(type: ProductType?) : Array<Product> {
+        if (type == null)
+            return products
         return products.filter { product: Product -> product.type== type}.toTypedArray()
     }
 
@@ -23,5 +26,4 @@ class ProductRepository {
         products = products.plusElement(product)
         return product.id!!
     }
-
 }

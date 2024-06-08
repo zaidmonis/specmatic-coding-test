@@ -1,8 +1,6 @@
 package com.store.controllers
 
-import com.store.objects.Product
-import com.store.objects.ProductResponse
-import com.store.objects.ProductType
+import com.store.objects.*
 import com.store.repositories.ProductRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,17 +13,13 @@ class Products {
 
     @GetMapping("/products")
     fun getProducts(@RequestParam(required = false) type: ProductType?) : ResponseEntity<Array<Product>> {
-        var productType = type
-        if (productType == null) {
-            productType = ProductType.other
-        }
-        val products = productRepository.getProducts(productType)
+        val products = productRepository.getProducts(type)
         return ResponseEntity(products,HttpStatus.OK)
     }
 
     @PostMapping("/products")
-    fun addProducts(@RequestBody @Valid product: Product) : ResponseEntity<Any> {
+    fun addProduct(@RequestBody @Valid product: Product) : ResponseEntity<Any> {
         val id = productRepository.addProduct(product)
-        return ResponseEntity(ProductResponse(id),HttpStatus.CREATED)
+        return ResponseEntity(ProductId(id),HttpStatus.CREATED)
     }
 }
