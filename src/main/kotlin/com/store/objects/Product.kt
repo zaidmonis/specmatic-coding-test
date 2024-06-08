@@ -15,5 +15,7 @@ data class Product(
     val type: ProductType,
     @JsonProperty("inventory")
     @NonNull
-    val inventory: Number
+    val inventory: Number,
+    @JsonProperty("cost")
+    val cost: Number
 )
